@@ -84,7 +84,7 @@ class HtmlView extends BaseHtmlView
 		{
 			if ($canDo->get('core.create'))
 			{
-				$toolbar->addNew('emaillog.add');
+			//	$toolbar->addNew('emaillog.add');
 			}
 		}
 
@@ -97,37 +97,37 @@ class HtmlView extends BaseHtmlView
 				->buttonClass('btn btn-action')
 				->listCheck(true);
 
-			$childBar = $dropdown->getChildToolbar();
+		//	$childBar = $dropdown->getChildToolbar();
 
 			if (isset($this->items[0]->state))
 			{
-				$childBar->publish('emaillogs.publish')->listCheck(true);
-				$childBar->unpublish('emaillogs.unpublish')->listCheck(true);
-				$childBar->archive('emaillogs.archive')->listCheck(true);
+			//	$childBar->publish('emaillogs.publish')->listCheck(true);
+			//	$childBar->unpublish('emaillogs.unpublish')->listCheck(true);
+			//	$childBar->archive('emaillogs.archive')->listCheck(true);
 			}
 			elseif (isset($this->items[0]))
 			{
 				// If this component does not use state then show a direct delete button as we can not trash
-				$toolbar->delete('emaillogs.delete')
-				->text('JTOOLBAR_EMPTY_TRASH')
-				->message('JGLOBAL_CONFIRM_DELETE')
-				->listCheck(true);
+//				$toolbar->delete('emaillogs.delete')
+//				->text('JTOOLBAR_EMPTY_TRASH')
+//				->message('JGLOBAL_CONFIRM_DELETE')
+//				->listCheck(true);
 			}
 
-			$childBar->standardButton('duplicate')
-				->text('JTOOLBAR_DUPLICATE')
-				->icon('fas fa-copy')
-				->task('emaillogs.duplicate')
-				->listCheck(true);
+			//$childBar->standardButton('duplicate')
+			//	->text('JTOOLBAR_DUPLICATE')
+			//	->icon('fas fa-copy')
+			//	->task('emaillogs.duplicate')
+			//	->listCheck(true);
 
 			if (isset($this->items[0]->checked_out))
 			{
-				$childBar->checkin('emaillogs.checkin')->listCheck(true);
+			//	$childBar->checkin('emaillogs.checkin')->listCheck(true);
 			}
 
 			if (isset($this->items[0]->state))
 			{
-				$childBar->trash('emaillogs.trash')->listCheck(true);
+			//	$childBar->trash('emaillogs.trash')->listCheck(true);
 			}
 		}
 

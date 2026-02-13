@@ -48,13 +48,6 @@ if (!empty($saveOrder)) {
                 <table class="table table-striped" id="emaillogList">
                     <thead>
                         <tr>
-                            <th class="w-1 text-center">
-                                <input type="checkbox" autocomplete="off" class="form-check-input" name="checkall-toggle" value=""
-                                       title="<?php echo Text::_('JGLOBAL_CHECK_ALL'); ?>" onclick="Joomla.checkAll(this)"/>
-                            </th>
-
-
-
                             <th class='left'>
                                 <?php echo HTMLHelper::_('searchtools.sort', 'COM_RA_LIBRARY_EMAILLOGS_DATETIME', 'a.datetime', $listDirn, $listOrder); ?>
                             </th>
@@ -96,12 +89,6 @@ if (!empty($saveOrder)) {
                             $canChange = $user->authorise('core.edit.state', 'com_ra_library');
                             ?>
                             <tr class="row<?php echo $i % 2; ?>" data-draggable-group='1' data-transition>
-                                <td class="text-center">
-                                    <?php echo HTMLHelper::_('grid.id', $i, $item->id); ?>
-                                </td>
-
-
-
                                 <td>
                                     <a href="<?php echo Route::_('index.php?option=com_ra_library&view=emaillog&id=' . (int) $item->id); ?>">
                                         <?php echo $item->datetime; ?>

@@ -16,6 +16,9 @@ use \Joomla\CMS\Factory;
 use \Joomla\CMS\MVC\Model\BaseDatabaseModel;
 use Joomla\CMS\Mail\MailerFactoryInterface;
 use Joomla\CMS\Date\Date;
+use Joomla\Database\DatabaseInterface;
+use Joomla\Database\ParameterType;
+use Joomla\CMS\Component\ComponentHelper;
 
 /**
  * Class Ra_libraryFrontendHelper
@@ -121,6 +124,7 @@ class Ra_libraryHelper {
             $mailer->addRecipient($sendTo->email, $sendTo->name);
             if ($copy !== null) {
                 $mailer->addCC($copy->email, $copy->name);
+                $copy = null;
             }
             $body = $content;
             $mailer->setBody($body);
@@ -178,5 +182,31 @@ class Ra_libraryHelper {
 
         $db = Factory::getContainer()->get('DatabaseDriver');
         $result = $db->insertObject('#__ra_email_log', $data, 'id');  // 'id' is primary key; gets auto-filled
+
+        self::purgeEmailLog();
+    }
+
+    public static function purgeEmailLog() {
+        $componentParams = ComponentHelper::getParams('com_ra_library');
+        $days = $componentParams->get('logretentionperiod', 180);
+
+        $db = Factory::getContainer()->get(DatabaseInterface::class);
+        $query = $db->getQuery(true);
+
+        // e.g. delete records older than $days days
+
+        $cutoff = (new \DateTimeImmutable())
+                ->modify("-{$days} days")
+                ->format('Y-m-d H:i:s');
+
+        $query
+                ->delete($db->quoteName('#__ra_email_log'))
+                ->where(
+                        $db->quoteName('datetime') . ' < :cutoffDate'
+                )
+                ->bind(':cutoffDate', $cutoff, ParameterType::STRING);
+
+        $db->setQuery($query);
+        $db->execute();
     }
 }

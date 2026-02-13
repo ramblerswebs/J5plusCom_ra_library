@@ -53,13 +53,6 @@ class EmaillogsModel extends ListModel
 		parent::__construct($config);
 	}
 
-
-	
-
-	
-
-	
-
 	/**
 	 * Method to auto-populate the model state.
 	 *
@@ -160,7 +153,7 @@ class EmaillogsModel extends ListModel
 		// Filtering sent
 		// Add the list ordering clause.
 		$orderCol  = $this->state->get('list.ordering', 'datetime');
-		$orderDirn = $this->state->get('list.direction', 'DESC');
+		$orderDirn = $this->state->get('list.direction', 'ASC');
 
 		if ($orderCol && $orderDirn)
 		{

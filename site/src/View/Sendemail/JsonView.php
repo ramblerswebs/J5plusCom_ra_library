@@ -27,9 +27,7 @@ class JsonView extends BaseJsonView {
     public function display($tpl = null) {
         try {
             $feedback = [];
-       //     helper::addEmailLog("c@c.ul",'title','a@a.o',true,'success');
-       //    return;
-           $data = helper::getPostedData();
+            $data = helper::getPostedData();
             $to = [];
             foreach ($data->toid as $id) {
                 $user = Factory::getUser($id);
